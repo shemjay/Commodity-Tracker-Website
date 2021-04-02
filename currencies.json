@@ -1,0 +1,22 @@
+[
+  {
+    "id": 657164,
+    "name": "EUR/USD",
+    "score": "100"
+  },
+  {
+    "id": 693284,
+    "name": "GBP/USD",
+    "score": "70"
+  },
+  {
+    "id": 653242,
+    "name": "EUR/GBP",
+    "score": "95"
+  },
+  {
+    "id": 653242,
+    "name": "EUR/USD",
+    "score": "65"
+  }
+]
