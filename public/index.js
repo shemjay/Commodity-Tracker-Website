@@ -140,6 +140,21 @@ document.querySelector('form').addEventListener('submit', (e) => {
     }
     if (currencyId && currencyName && currencyScore) {
         currencyId = parseInt(currencyId);
+        // THIS IS WHERE WE PUT THE PRE-EXISTING FUCNTIONALITY CHECK
+        let listOfCurrencyIds = [];
+        let dataObj = fetchCurrencies()
+        for (i=0; i < dataObj.length; i++ ) {
+          listOfCurrencyIds.push(dataObj[i]["id"])
+          if (dataObj[i].id === 657164){
+            console.log('braaaaaaaaaaaaaaaaaaaaaa')
+          }
+        }
+        // const findExist = listOfCurrencyIds.inludes(currencyID)
+        //
+        // if (findExist) {
+        //   console.log('huhaaa')
+        // }
+
         addStudent();
         fetchCurrencies();
         window.alert("Student details added successfully!");
