@@ -23,10 +23,10 @@ app.post('/students', jsonParser, (request, response) => {
 
 // This will check for pre-existing data in an Array
 // potato = ['dd', 'dd', 'dd', 'dd']
-const findExist = existUsers.find(user) {
-  user.username === userData.username
-}
+// const findExist = existUsers.find(user) {
+//   user.username === userData.username
+// }
 
-if (findExist) {
-  return res.status(409).send({error: true, msg: 'username already exist'})
-}
+// if (findExist) {
+//   return res.status(409).send({error: true, msg: 'username already exist'})
+// }

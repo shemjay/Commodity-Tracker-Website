@@ -368,3 +368,11 @@ const output2 = matches => {
 
 
 deleteSearch.addEventListener('input', () => deleteStudents(deleteSearch.value));
+
+
+
+
+
+
+// name actions
+// jonsnow edit delete
