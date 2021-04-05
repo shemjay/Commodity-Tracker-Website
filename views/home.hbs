@@ -32,8 +32,7 @@
             <form>
               <div class="form-group">
                 <label>Currency Name</label>
-                <!-- <input type="text" class="form-control" name="student-name" id="currencyName" placeholder="Enter currency name"> -->
-                <select name="student-name" id="currencyName" class="form-control">
+                <select name="currency-name" id="currencyName" class="form-control">
 
                   <option value="EUR/USD">EUR/USD</option>
                   <option value="GBP/USD">GBP/USD</option>
@@ -42,11 +41,11 @@
               </div>
               <div class="form-group">
                 <label>Currency ID</label>
-                <input type="text" class="form-control" name="student-id" id="currencyId" placeholder="Enter currency id">
+                <input type="text" class="form-control" name="currency-id" id="currencyId" placeholder="Enter a unique currency ID">
               </div>
               <div class="form-group">
                 <label>CURRENCY EXCHANGE RATE</label>
-                <input type="number" class="form-control" name="student-score" id="currencyScore" placeholder="Enter currency exchange rate">
+                <input type="number" class="form-control" name="currency-score" id="currencyScore" placeholder="Enter currency exchange rate">
               </div>
               <input type="submit" class="mx-auto btn btn-primary" value="ADD" id="submit">
             </form>
@@ -56,7 +55,7 @@
                 <div class="text-center mt-3">
                   <h5 class="text-center">Search Currency Record</h5>
                   <div class="form-group form-group-lg">
-                    <input type="text" id="search" class="form-control mt-4" placeholder="Enter currency name">
+                    <input type="text" id="search" class="form-control mt-4" placeholder="Enter currency ID">
                   </div>
                   <div id="match-list"></div>
                 </div>
@@ -79,7 +78,7 @@
             <div class="text-center mt-3">
               <h6>Search & Delete Currency Record</h6>
               <div class="form-group form-group-lg">
-                <input type="text" id="deleteSearch" class="form-control mt-4" placeholder="Enter currency name">
+                <input type="text" id="deleteSearch" class="form-control mt-4" placeholder="Enter currency ID">
               </div>
               <div id="delete-list"></div>
             </div>

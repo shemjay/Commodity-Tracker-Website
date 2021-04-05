@@ -84,12 +84,12 @@ app.post('/currencies', jsonParser, (request, response) => {
 // This is a RESTful POST web service
 app.put('/currencies/:currencyId', jsonParser, (request, response) => {
     readFile(data => {
-        const currencyName = request.params['currencyName'];
-        const student = data.filter((st) => st.id == currencyName);
-        student[0]['name'] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
-        student[0]['score'] = request.body['score'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        const currencyName = request.params['currencyId'];
+        const currency = data.filter((st) => st.id == currencyName);
+        currency[0]["name"] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        currency[0]['score'] = request.body['score'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
         writeFile(JSON.stringify(data, null, 2), () => {
-            response.status(200).send(`students name:${currencyName} updated`);
+            response.status(200).send(`currency's name:${currencyName} updated`);
         });
     }, true);
 });
@@ -97,10 +97,10 @@ app.put('/currencies/:currencyId', jsonParser, (request, response) => {
 app.delete('/currencies/:id', (req, res) => {
     readFile(data => {
         const currencyId = req.params['id'];
-        var studentIndex = data.findIndex(obj => obj.id == currencyId);
-        data.splice([studentIndex], 1)
+        var currencyIndex = data.findIndex(obj => obj.id == currencyId);
+        data.splice([currencyIndex], 1)
         writeFile(JSON.stringify(data, null, 2), () => {
-            res.status(200).send(`students id:${currencyId} removed`);
+            res.status(200).send(`currency's id:${currencyId} removed`);
         });
     }, true);
 });

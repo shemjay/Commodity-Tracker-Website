@@ -73,5 +73,30 @@
     "id": "444444",
     "name": "EUR/GBP",
     "score": "44"
+  },
+  {
+    "id": "555555",
+    "name": "EUR/USD",
+    "score": "55"
+  },
+  {
+    "id": "666666",
+    "name": "EUR/USD",
+    "score": "66"
+  },
+  {
+    "id": "666666",
+    "name": "EUR/GBP",
+    "score": "66"
+  },
+  {
+    "id": "888888",
+    "name": "GBP/USD",
+    "score": "88"
+  },
+  {
+    "id": "888888",
+    "name": "EUR/USD",
+    "score": "88"
   }
 ]

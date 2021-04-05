@@ -53,46 +53,46 @@ async function fetchCurrencies() {
         }
     }
     const response = await fetch(url, options);
-    const students = await response.json();
-    populateContent(students);
+    const currencies = await response.json();
+    populateContent(currencies);
 }
 
-async function addStudent() {
+async function addCurrency() {
     const url = server + '/currencies';
-    const student = { id: currencyId, name: currencyName, score: currencyScore };
+    const currencies = { id: currencyId, name: currencyName, score: currencyScore };
     const options = {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(student)
+        body: JSON.stringify(currencies)
     }
     const response = await fetch(url, options);
 }
 
-async function editStudent(sName) {
+async function editCurrency(sName) {
     const url = server + `/currencies/${sName}`;
-    const student = { id: newCurrencyId, name: newCurrencyName, score: newCurrencyScore };
+    const currencies = { id: newCurrencyId, name: newCurrencyName, score: newCurrencyScore };
     const options = {
         method: 'PUT',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(student)
+        body: JSON.stringify(currencies)
     }
     const response = await fetch(url, options);
 }
 
 // Delete function
-async function deleteStudent(sId) {
+async function deleteCurrency(sId) {
     const url = server + `/currencies/${sId}`;
-    const student = { id: dCurrencyId, name: dCurrencyName, score: dCurrencyScore };
+    const currencies = { id: dCurrencyId, name: dCurrencyName, score: dCurrencyScore };
     const options = {
         method: 'DELETE',
         headers: {
             'Content-Type': 'application/json'
         },
-        body: JSON.stringify(student)
+        body: JSON.stringify(currencies)
     }
     const response = await fetch(url, options);
 }
@@ -142,7 +142,7 @@ function getNames() {
           clear();
           return;
         } else if (currencyId.length != 6 ) {
-            window.alert("Student ID should have 6 characters!");
+            window.alert("Currency ID should have 6 characters!");
             clear();
             return;
         } else if (currencyScore < 0) {
@@ -159,9 +159,9 @@ function getNames() {
             // currencyId = parseInt(currencyId);
             // THIS IS WHERE WE PUT THE PRE-EXISTING FUCNTIONALITY CHECK
 
-            addStudent();
+            addCurrency();
             fetchCurrencies();
-            window.alert("Student details added successfully!");
+            window.alert("Currency details added successfully!");
             clear();
 
         }
@@ -185,15 +185,15 @@ getNames()
 const search = document.getElementById('search');
 const matchList = document.getElementById('match-list');
 
-// Search students.json and filter it
-const searchStudents = async searchText => {
+// Search currencies.json and filter it
+const searchCurrencies = async searchText => {
     const response = await fetch(server + '/currencies');
-    const students = await response.json();
+    const currencies = await response.json();
 
     // Get matches to current text input
-    let matches = students.filter(student => {
+    let matches = currencies.filter(currency => {
         const regex = new RegExp(`${searchText}`, 'gi');
-        return student.name.match(regex);
+        return currency.name.match(regex);
     });
 
     if (searchText.length === 0) {
@@ -217,7 +217,7 @@ const outputHtml = matches => {
     }
 }
 
-search.addEventListener('input', () => searchStudents(search.value));
+search.addEventListener('input', () => searchCurrencies(search.value));
 
 
 // EDIT FUNCTIONALITY
@@ -225,22 +225,22 @@ search.addEventListener('input', () => searchStudents(search.value));
 const editSearch = document.getElementById('editSearch');
 const editList = document.getElementById('edit-list');
 
-// Search students.json and filter it
-const editStudents = async searchText => {
+// Search currencies.json and filter it
+const editCurrencies = async searchText => {
     const response = await fetch(server + '/currencies');
-    const students = await response.json();
+    const currencies = await response.json();
 
 var the_c_name = [];
-for(i=0; i < students.length; i++){
-  the_c_name.push(students[i]["name"]);
+for(i=0; i < currencies.length; i++){
+  the_c_name.push(currencies[i]["name"]);
 }
 
 
 
     // Get matches to current text input
-    let matches = students.filter(student => {
+    let matches = currencies.filter(currency => {
         const regex = new RegExp(`${searchText}`, 'gi');
-        return student.id.match(regex);
+        return currency.id.match(regex);
     });
 
     if (searchText.length === 0) {
@@ -299,11 +299,9 @@ const output = matches => {
                 return;
 
             }
-            editStudent(oldCurrencyName);
-            // editStudent(GBP/USD)
-            http://localhost:8000/GBP/USD
+            editCurrency(oldCurrencyName);
             fetchCurrencies();
-            window.alert("Student details editted successfully!");
+            window.alert("Currency details editted successfully!");
             window.clear();
             e.preventDefault();
         });
@@ -311,7 +309,7 @@ const output = matches => {
 }
 
 
-editSearch.addEventListener('input', () => editStudents(editSearch.value));
+editSearch.addEventListener('input', () => editCurrencies(editSearch.value));
 
 
 // DELETE FUNCTIONALITY
@@ -319,15 +317,15 @@ editSearch.addEventListener('input', () => editStudents(editSearch.value));
 const deleteSearch = document.getElementById('deleteSearch');
 const deleteList = document.getElementById('delete-list');
 
-// Search students.json and filter it
-const deleteStudents = async searchText => {
+// Search currencies.json and filter it
+const deleteCurrencies = async searchText => {
     const response = await fetch(server + '/currencies');
-    const students = await response.json();
+    const currencies = await response.json();
 
     // Get matches to current text input
-    let matches = students.filter(student => {
+    let matches = currencies.filter(currency => {
         const regex = new RegExp(`${searchText}`);
-        return student.id.match(regex);
+        return currency.id.match(regex);
     });
 
     if (searchText.length === 0) {
@@ -350,13 +348,13 @@ const output2 = matches => {
         const html = matches.map(match =>
             `
         <form id="DELETE">
-        <label class="font-weight-bold">DELETE STUDENT DETAILS</label>
+        <label class="font-weight-bold">DELETE CURRENCY DETAILS</label>
             <div class="form-group">
-                <div class="d-inline mw-100">Student ID: </>
+                <div class="d-inline mw-100">Currency ID: </>
                 <div class="d-inline" contenteditable="true" id="newCurrencyId" > ${match.id} </>
             </div>
             <div class="form-group">
-                <div class="d-inline">Student Name: </>
+                <div class="d-inline">Currency Name: </>
                 <div name="name" class="d-inline" contenteditable="true" id="newCurrencyName"> ${match.name} </>
             </div>
             <div class="form-group">
@@ -376,9 +374,9 @@ const output2 = matches => {
             dCurrencyName = document.querySelector('#newCurrencyName').innerHTML;
             dCurrencyScore = document.querySelector('#newCurrencyScore').innerHTML;
 
-            deleteStudent(deleteCurrencyId);
+            deleteCurrency(deleteCurrencyId);
             fetchCurrencies();
-            window.alert("Student details deleted successfully!");
+            window.alert("Currency details deleted successfully!");
             window.clear();
             e.preventDefault();
         });
@@ -386,7 +384,7 @@ const output2 = matches => {
 }
 
 
-deleteSearch.addEventListener('input', () => deleteStudents(deleteSearch.value));
+deleteSearch.addEventListener('input', () => deleteCurrencies(deleteSearch.value));
 
 
 
