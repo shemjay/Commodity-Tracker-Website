@@ -82,10 +82,10 @@ app.post('/currencies', jsonParser, (request, response) => {
 });
 
 // This is a RESTful POST web service
-app.put('/currencies/:currencyName', jsonParser, (request, response) => {
+app.put('/currencies/:currencyId', jsonParser, (request, response) => {
     readFile(data => {
         const currencyName = request.params['currencyName'];
-        const student = data.filter((st) => st.name == currencyName);
+        const student = data.filter((st) => st.id == currencyName);
         student[0]['name'] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
         student[0]['score'] = request.body['score'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
         writeFile(JSON.stringify(data, null, 2), () => {

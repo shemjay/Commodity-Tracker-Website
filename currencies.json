@@ -1,47 +1,77 @@
 [
   {
-    "id": 657164,
+    "id": "123456",
     "name": "EUR/USD",
-    "score": "40"
+    "score": "17"
   },
   {
-    "id": 657164,
+    "id": "575678",
+    "name": "GBP/USD",
+    "score": "95"
+  },
+  {
+    "id": "234567",
     "name": "EUR/USD",
-    "score": "20"
+    "score": "34"
   },
   {
-    "id": 657164,
+    "id": "345678",
+    "name": "EUR/GBP",
+    "score": "56"
+  },
+  {
+    "id": "456789",
     "name": "EUR/USD",
-    "score": "66"
+    "score": "45"
   },
   {
-    "id": 693284,
-    "name": "GBP/USD",
-    "score": "20"
-  },
-  {
-    "id": 693284,
-    "name": "GBP/USD",
-    "score": "70"
-  },
-  {
-    "id": 693284,
-    "name": "GBP/USD",
-    "score": "50"
-  },
-  {
-    "id": 693284,
-    "name": "GBP/USD",
-    "score": "90"
-  },
-  {
-    "id": 693284,
-    "name": "GBP/USD",
-    "score": "70"
-  },
-  {
-    "id": 987654,
+    "id": "654321",
     "name": "EUR/USD",
-    "score": "23"
+    "score": "12"
+  },
+  {
+    "id": "432234",
+    "name": "EUR/USD",
+    "score": "56"
+  },
+  {
+    "id": "768645",
+    "name": "GBP/USD",
+    "score": "45"
+  },
+  {
+    "id": "563458",
+    "name": "GBP/USD",
+    "score": "67"
+  },
+  {
+    "id": "789045",
+    "name": "GBP/USD",
+    "score": "34"
+  },
+  {
+    "id": "343445",
+    "name": "GBP/USD",
+    "score": "56"
+  },
+  {
+    "id": "566754",
+    "name": "EUR/GBP",
+    "score": "46"
+  },
+  {
+    "id": "466888",
+    "name": "EUR/GBP",
+    "score": "45"
+  },
+  {
+    "id": "345543",
+    "name": "EUR/GBP",
+    "score": "34"
+  },
+  {
+    "id": "444444",
+    "name": "EUR/GBP",
+    "score": "44"
   }
 ]

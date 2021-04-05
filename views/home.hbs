@@ -139,22 +139,22 @@ $.getJSON("/currencies", function(data) {
 
   for (i=0; i < marylin.length; i++) {
       const fivedatapoints = marylin.slice(i, average + i);
-      marylinmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / fivedatapoints.length);
+      marylinmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
       // console.log(marylinmovingAverage);
   }
   for (i=0; i < manson.length; i++) {
       const fivedatapoints = manson.slice(i, average + i);
-      mansonmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / fivedatapoints.length);
+      mansonmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
       // console.log(mansonmovingAverage);
   }
   for (i=0; i < celeste.length; i++) {
       const fivedatapoints = celeste.slice(i, average + i);
-      celestemovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / fivedatapoints.length);
+      celestemovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
       // console.log(celestemovingAverage);
   }
 
 
-console.log(Math.max(marylinmovingAverage.length, mansonmovingAverage.length, celestemovingAverage.length));
+// console.log(Math.max(marylinmovingAverage.length, mansonmovingAverage.length, celestemovingAverage.length));
   const randomlabels = Math.max(marylinmovingAverage.length, mansonmovingAverage.length, celestemovingAverage.length);
   for (i=1; i < randomlabels; i++){
     the_labels.push(`A${i}`)

@@ -120,55 +120,65 @@ function populateContent(currenciez) {
 }
 
 
-document.querySelector('form').addEventListener('submit', (e) => {
-    currencyId = document.getElementById('currencyId').value;
-    currencyName = document.getElementById('currencyName').value;
-    currencyScore = document.getElementById('currencyScore').value;
-    if (currencyId.length != 6) {
-        window.alert("Student ID should have 6 characters!");
-        clear();
-        return;
-    } else if (currencyScore < 0) {
-        window.alert("Score should not be below 0");
-        clear();
-        return;
-    } else if (currencyScore > 100) {
-        window.alert("Score should not be above 100");
-        clear();
-        return;
-
+var myeurl;
+var i;
+var emptyList = [];
+function getNames() {
+  $.getJSON("/currencies", function(data) {
+    myeurl = data;
+    for(i = 0; i < myeurl.length; i++){
+      emptyList.push(myeurl[i]["id"])
     }
-    if (currencyId && currencyName && currencyScore) {
-        currencyId = parseInt(currencyId);
-        // THIS IS WHERE WE PUT THE PRE-EXISTING FUCNTIONALITY CHECK
-        let listOfCurrencyIds = [];
-        let dataObj = fetchCurrencies()
-        for (i=0; i < dataObj.length; i++ ) {
-          listOfCurrencyIds.push(dataObj[i]["id"])
-          if (dataObj[i].id === 657164){
-            console.log('braaaaaaaaaaaaaaaaaaaaaa')
-          }
+    // console.log(emptyList);
+
+
+    document.querySelector('form').addEventListener('submit', (e) => {
+
+        currencyId = document.getElementById('currencyId').value;
+        currencyName = document.getElementById('currencyName').value;
+        currencyScore = document.getElementById('currencyScore').value;
+        if (emptyList.includes(currencyId)){
+          window.alert('There is an existing Currency ID')
+          clear();
+          return;
+        } else if (currencyId.length != 6 ) {
+            window.alert("Student ID should have 6 characters!");
+            clear();
+            return;
+        } else if (currencyScore < 0) {
+            window.alert("Score should not be below 0");
+            clear();
+            return;
+        } else if (currencyScore > 100) {
+            window.alert("Score should not be above 100");
+            clear();
+            return;
+
         }
-        // const findExist = listOfCurrencyIds.inludes(currencyID)
-        //
-        // if (findExist) {
-        //   console.log('huhaaa')
-        // }
+        if (currencyId && currencyName && currencyScore) {
+            // currencyId = parseInt(currencyId);
+            // THIS IS WHERE WE PUT THE PRE-EXISTING FUCNTIONALITY CHECK
 
-        addStudent();
-        fetchCurrencies();
-        window.alert("Student details added successfully!");
-        clear();
+            addStudent();
+            fetchCurrencies();
+            window.alert("Student details added successfully!");
+            clear();
 
-    }
-    e.preventDefault();
+        }
+        e.preventDefault();
 
-    function clear() {
-        currencyId = document.getElementById('currencyId').value = "";
-        currencyName = document.getElementById('currencyName').value = "";
-        currencyScore = document.getElementById('currencyScore').value = "";
-    }
-});
+        function clear() {
+            currencyId = document.getElementById('currencyId').value = "";
+            currencyName = document.getElementById('currencyName').value = "";
+            currencyScore = document.getElementById('currencyScore').value = "";
+        }
+    });
+
+  });
+}
+getNames()
+
+
 
 // VIEW FUNCTIONALITY
 
@@ -220,10 +230,17 @@ const editStudents = async searchText => {
     const response = await fetch(server + '/currencies');
     const students = await response.json();
 
+var the_c_name = [];
+for(i=0; i < students.length; i++){
+  the_c_name.push(students[i]["name"]);
+}
+
+
+
     // Get matches to current text input
     let matches = students.filter(student => {
         const regex = new RegExp(`${searchText}`, 'gi');
-        return student.name.match(regex);
+        return student.id.match(regex);
     });
 
     if (searchText.length === 0) {
@@ -240,7 +257,7 @@ const output = matches => {
     if (matches.length > 0) {
 
         matches.map(m => {
-            oldCurrencyName = m.name;
+            oldCurrencyName = m.id;
             console.log(oldCurrencyName)
         });
         const html = matches.map(match =>
@@ -249,7 +266,7 @@ const output = matches => {
         <label class="font-weight-bold">EDIT CURRENCY DETAILS</label>
             <div class="form-group">
                 <div class="d-inline mw-100">Currency ID: </>
-                <div class="d-inline"  id="newID" > ${match.id} </>
+                <div class="d-inline"  id="newID" > ${match.id}
             </div>
             <div class="form-group">
                 <div class="d-inline">Currency Name: </>
@@ -283,6 +300,8 @@ const output = matches => {
 
             }
             editStudent(oldCurrencyName);
+            // editStudent(GBP/USD)
+            http://localhost:8000/GBP/USD
             fetchCurrencies();
             window.alert("Student details editted successfully!");
             window.clear();
@@ -307,8 +326,8 @@ const deleteStudents = async searchText => {
 
     // Get matches to current text input
     let matches = students.filter(student => {
-        const regex = new RegExp(`${searchText}`, 'gi');
-        return student.name.match(regex);
+        const regex = new RegExp(`${searchText}`);
+        return student.id.match(regex);
     });
 
     if (searchText.length === 0) {
