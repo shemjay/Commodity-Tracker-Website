@@ -44,12 +44,12 @@ const writeFile = (
 };
 
 app.get('/', async function (request, response) {
-    var scoreArray = [];
+    // var scoreArray = [];
     readFile(data => {
-    const doubled = data.map(item => item.score);
-    scoreArray = doubled;
+    // const doubled = data.map(item => item.score);
+    // scoreArray = doubled;
     response.render('home', {
-        scoreArray: scoreArray
+        // scoreArray: scoreArray
     });
     }, true);
 

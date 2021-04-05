@@ -141,8 +141,8 @@ function getNames() {
           window.alert('There is an existing Currency ID')
           clear();
           return;
-        } else if (currencyId.length != 6 ) {
-            window.alert("Currency ID should have 6 characters!");
+        } else if (currencyId.length != 4  && currencyName === " ") {
+            window.alert("Currency ID should have 4 characters!");
             clear();
             return;
         } else if (currencyScore < 0) {
