@@ -166,58 +166,57 @@ var myurl;
 $.getJSON("/currencies", function(data) {
   myurl = data;
   const average = 5;
-  var marylin = [];
-  var manson = [];
-  var celeste = [];
+  var gbp = [];
+  var eurgbp = [];
+  var eur = [];
 
-  const currencyExRt = [24,34,66,55,77,88,99,44,22,56,87,34,67]
-  const marylinExRt = []
-  const mansonExRt = []
-  const celesteExRt = []
+  const gbpExRt = []
+  const eurgbpExRt = []
+  const eurExRt = []
 
 
   const the_labels = []
 
-  const marylinmovingAverage = [];
-  const mansonmovingAverage = [];
-  const celestemovingAverage = [];
+  const gbpmovingAverage = [];
+  const eurgbpmovingAverage = [];
+  const eurmovingAverage = [];
 
 
   for (var i = 0; i < myurl.length; i++){
     if("EUR/GBP" === myurl[i]["name"]){
-      manson.push(parseInt(myurl[i]["rate"]) )
+      eurgbp.push(parseInt(myurl[i]["rate"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
     if("GBP/USD" === myurl[i]["name"]){
-      marylin.push(parseInt(myurl[i]["rate"]) )
+      gbp.push(parseInt(myurl[i]["rate"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
     if("EUR/USD" === myurl[i]["name"]){
-      celeste.push(parseInt(myurl[i]["rate"]) )
+      eur.push(parseInt(myurl[i]["rate"]) )
     }
   }
 
-  for (i=0; i < marylin.length; i++) {
-      const fivedatapoints = marylin.slice(i, average + i);
-      marylinmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(marylinmovingAverage);
+  for (i=0; i < gbp.length; i++) {
+      const fivedatapoints = gbp.slice(i, average + i);
+      gbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(gbpmovingAverage);
   }
-  for (i=0; i < manson.length; i++) {
-      const fivedatapoints = manson.slice(i, average + i);
-      mansonmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(mansonmovingAverage);
+  for (i=0; i < eurgbp.length; i++) {
+      const fivedatapoints = eurgbp.slice(i, average + i);
+      eurgbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(eurgbpmovingAverage);
   }
-  for (i=0; i < celeste.length; i++) {
-      const fivedatapoints = celeste.slice(i, average + i);
-      celestemovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(celestemovingAverage);
+  for (i=0; i < eur.length; i++) {
+      const fivedatapoints = eur.slice(i, average + i);
+      eurmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
+      // console.log(eurmovingAverage);
   }
 
 
-// console.log(Math.max(marylinmovingAverage.length, mansonmovingAverage.length, celestemovingAverage.length));
-  const randomlabels = Math.max(marylinmovingAverage.length, mansonmovingAverage.length, celestemovingAverage.length);
+// console.log(Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length));
+  const randomlabels = Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length);
   for (i=1; i < randomlabels; i++){
     the_labels.push(`A${i}`)
     // console.log('darknexx')
@@ -233,21 +232,21 @@ $.getJSON("/currencies", function(data) {
         datasets: [
           {
           label: 'EUR/GBP',
-          data: [...mansonmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+          data: [...eurgbpmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
           },
           {
             label: 'GBP/USD',
-            data: [...marylinmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+            data: [...gbpmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
             fill: false,
             borderColor: 'rgb(255, 0, 0)',
             tension: 0.1
           },
           {
             label: 'EUR/USD',
-            data: [...celestemovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+            data: [...eurmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
             fill: false,
             borderColor: 'purple',
             tension: 0.1
