@@ -6,14 +6,14 @@ const port = 4000;
 const jsonParser = bodyParser.json();
 const fileName = 'currencies.json';
 
-// Load data from file
+
 let rawData = fs.readFileSync(fileName);
 let data = JSON.parse(rawData);
 
 app.set('views', 'views');
 app.set('view engine', 'hbs');
 app.use(express.static('public'));
-// refactored helper methods
+
 const readFile = (
     callback,
     returnJson = false,
@@ -44,18 +44,12 @@ const writeFile = (
 };
 
 app.get('/', async function (request, response) {
-    // var scoreArray = [];
     readFile(data => {
-    // const doubled = data.map(item => item.score);
-    // scoreArray = doubled;
     response.render('home', {
-        // scoreArray: scoreArray
     });
     }, true);
-
 });
 
-// This is a RESTful GET web service
 app.get('/currencies', (request, response) => {
     readFile(data => {
         data.sort((a, b) => (a.name > b.name) ? 1 : -1);
@@ -63,7 +57,6 @@ app.get('/currencies', (request, response) => {
     }, true);
 });
 
-// This is a RESTful POST web service
 app.post('/currencies', jsonParser, (request, response) => {
     data.push(request.body);
     fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
@@ -78,22 +71,20 @@ app.post('/currencies', jsonParser, (request, response) => {
             message: 'That currency ID has already been entered'
         });
     }
-    // response.end();
 });
 
-// This is a RESTful POST web service
 app.put('/currencies/:currencyId', jsonParser, (request, response) => {
     readFile(data => {
         const currencyName = request.params['currencyId'];
         const currency = data.filter((st) => st.id == currencyName);
         currency[0]["name"] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
-        currency[0]['score'] = request.body['score'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        currency[0]['rate'] = request.body['rate'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
         writeFile(JSON.stringify(data, null, 2), () => {
             response.status(200).send(`currency's name:${currencyName} updated`);
         });
     }, true);
 });
-// DELETE
+
 app.delete('/currencies/:id', (req, res) => {
     readFile(data => {
         const currencyId = req.params['id'];

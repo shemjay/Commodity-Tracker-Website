@@ -12,20 +12,83 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<style>
+  .navbar{
+            /* background-color: rgb(81, 4, 153); */
+            background-color: #378a0d;
+            opacity: 0.8;
+            position: sticky;
+            
+        }
+  body {
+    background: #FFFF00;  /* fallback for old browsers */
+  }
+  body::after {
+  content: "";
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+}
+
+
+</style>
+
 </head>
 
 <body onload="fetchCurrencies()">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">Simple Moving Average</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNavDropdown">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#intro">Introduction <span class="sr-only">(current)</span></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#tut">Tutorial</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#calc">Calculate</a>
+      </li>
+    </ul>
+  </div>
+</nav>
   <br><br><br>
-  <div class="">
-    <div class="row">
-      <div class="col-md-2">
-        <div class=""  aria-label="Basic example">
-          <button type="button" class="btn btn-primary ml-4" onclick="viewcontent()">VIEW</button><br><br>
-          <button type="button" class="btn btn-danger ml-4" onclick="addcontent()">ADD</button><br><br>
-          <button type="button" class="btn btn-warning ml-4" onclick="editcontent()">EDIT</button><br><br>
-          <button type="button" class="btn btn-secondary ml-4" onclick="deletecontent()">DELETE</button>
-        </div>
+  <div class="container">
+    <div class="row">        
+      <div class="col-sm-12" id="intro">
+          <h1 id="intro">Introduction</h1>
+          <p style="color: black;">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
+          sed do eiusmod tempor incididunt ut labore 
+          et dolore magna aliqua. Ut enim ad minim veniam, 
+          quis nostrud exercitation ullamco laboris nisi ut 
+          aliquip ex ea commodo consequat.
+          </p>
       </div>
+    </div>
+    <div>
+            <h1 id="tut" style="text-align:center;">Tutorial:</h1>
+            <h3>Step 1:</h3>
+            <h3>Step 2:</h3>
+            <h3>Step 3:</h3>
+            <h3>Step 4:</h3>
+        </div><br>
+    <div class="row">
+      <div class="col-md-3"><button type="button" class="btn btn-primary " onclick="viewcontent()">VIEW ENTRIES</button></div>
+      <div class="col-md-3"><button type="button" class="btn btn-danger " onclick="addcontent()">ADD NEW ENTRY</button></div>
+      <div class="col-md-3"><button type="button" class="btn btn-warning " onclick="editcontent()">EDIT AN ENTRY</button></div>
+      <div class="col-md-3"><button type="button" class="btn btn-secondary" onclick="deletecontent()">DELETE AN ENTRY</button></div>
+    </div>
+    <br><br><br>
+    
+    <div class="row">
 
         <div class="col-md-4">
           <div class="add">
@@ -45,7 +108,7 @@
               </div>
               <div class="form-group">
                 <label>CURRENCY EXCHANGE RATE</label>
-                <input type="number" class="form-control" name="currency-score" id="currencyScore" placeholder="Enter currency exchange rate">
+                <input type="number" class="form-control" name="currency-rate" id="currencyRate" placeholder="Enter currency exchange rate">
               </div>
               <input type="submit" class="mx-auto btn btn-primary" value="ADD" id="submit">
             </form>
@@ -66,7 +129,7 @@
             <div class="text-center mt-3">
               <h5>Search & Edit Currency Record</h5>
               <p>(To edit currency record ensure only the desired record appears on the screen)</p>
-              <p>(Click on the Name or Score respectively to edit)</p>
+              <p>(Click on the Name or Rate respectively to edit)</p>
               <div class="form-group form-group-lg">
                 <input type="text" id="editSearch" class="form-control mt-4" placeholder="Enter currency ID">
               </div>
@@ -86,12 +149,12 @@
         </div>
       <br><br>
 
-      <div class="col-md-6 text-center">
+      <div class="col-md-8 text-center ml-auto">
         <h6>
           A GRAPH DISPLAYING CURRENCY SMAs
         </h6>
         <p>* To update the chart refresh the page</p>
-        <center><canvas id="myChart" style="max-width: 500px; margin-top: 45px;"></canvas></center>
+        <canvas id="myChart" style=""></canvas>
       </div>
     </div>
   </div>
@@ -122,17 +185,17 @@ $.getJSON("/currencies", function(data) {
 
   for (var i = 0; i < myurl.length; i++){
     if("EUR/GBP" === myurl[i]["name"]){
-      manson.push(parseInt(myurl[i]["score"]) )
+      manson.push(parseInt(myurl[i]["rate"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
     if("GBP/USD" === myurl[i]["name"]){
-      marylin.push(parseInt(myurl[i]["score"]) )
+      marylin.push(parseInt(myurl[i]["rate"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
     if("EUR/USD" === myurl[i]["name"]){
-      celeste.push(parseInt(myurl[i]["score"]) )
+      celeste.push(parseInt(myurl[i]["rate"]) )
     }
   }
 
@@ -213,6 +276,7 @@ $.getJSON("/currencies", function(data) {
 
 
   <script type="text/javascript" src="index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
 </body>
 
 </html>

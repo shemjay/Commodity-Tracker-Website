@@ -30,19 +30,19 @@ function deletecontent() {
 const server = 'http://localhost:4000';
 var currencyId;
 var currencyName;
-var currencyScore;
+var currencyRate;
 
 var oldCurrencyName
 
 var newCurrencyName;
 var newCurrencyId;
-var newCurrencyScore;
+var newcurrencyRate;
 
 var deleteCurrencyId;
 
 var dCurrencyId;
 var dCurrencyName;
-var dCurrencyScore
+var dcurrencyRate
 
 async function fetchCurrencies() {
     const url = server + '/currencies';
@@ -59,7 +59,7 @@ async function fetchCurrencies() {
 
 async function addCurrency() {
     const url = server + '/currencies';
-    const currencies = { id: currencyId, name: currencyName, score: currencyScore };
+    const currencies = { id: currencyId, name: currencyName, rate: currencyRate };
     const options = {
         method: 'POST',
         headers: {
@@ -72,7 +72,7 @@ async function addCurrency() {
 
 async function editCurrency(sName) {
     const url = server + `/currencies/${sName}`;
-    const currencies = { id: newCurrencyId, name: newCurrencyName, score: newCurrencyScore };
+    const currencies = { id: newCurrencyId, name: newCurrencyName, rate: newcurrencyRate };
     const options = {
         method: 'PUT',
         headers: {
@@ -86,7 +86,7 @@ async function editCurrency(sName) {
 // Delete function
 async function deleteCurrency(sId) {
     const url = server + `/currencies/${sId}`;
-    const currencies = { id: dCurrencyId, name: dCurrencyName, score: dCurrencyScore };
+    const currencies = { id: dCurrencyId, name: dCurrencyName, rate: dcurrencyRate };
     const options = {
         method: 'DELETE',
         headers: {
@@ -109,12 +109,12 @@ function populateContent(currenciez) {
         var dataName = document.createElement('td');
         var textName = document.createTextNode(currency.name);
         dataName.appendChild(textName);
-        var dataScore = document.createElement('td');
-        var textScore = document.createTextNode(currency.score);
-        dataScore.appendChild(textScore);
+        var dataRate = document.createElement('td');
+        var textRate = document.createTextNode(currency.rate);
+        dataRate.appendChild(textRate);
         row.appendChild(dataId);
         row.appendChild(dataName);
-        row.appendChild(dataScore);
+        row.appendChild(dataRate);
         table.appendChild(row);
     });
 }
@@ -129,14 +129,13 @@ function getNames() {
     for(i = 0; i < myeurl.length; i++){
       emptyList.push(myeurl[i]["id"])
     }
-    // console.log(emptyList);
 
 
     document.querySelector('form').addEventListener('submit', (e) => {
 
         currencyId = document.getElementById('currencyId').value;
         currencyName = document.getElementById('currencyName').value;
-        currencyScore = document.getElementById('currencyScore').value;
+        currencyRate = document.getElementById('currencyRate').value;
         if (emptyList.includes(currencyId)){
           window.alert('There is an existing Currency ID')
           clear();
@@ -145,19 +144,12 @@ function getNames() {
             window.alert("Currency ID should have 4 characters!");
             clear();
             return;
-        } else if (currencyScore < 0) {
-            window.alert("Score should not be below 0");
+        } else if (currencyRate < 0) {
+            window.alert("Rate should not be below 0");
             clear();
             return;
-        } else if (currencyScore > 100) {
-            window.alert("Score should not be above 100");
-            clear();
-            return;
-
         }
-        if (currencyId && currencyName && currencyScore) {
-            // currencyId = parseInt(currencyId);
-            // THIS IS WHERE WE PUT THE PRE-EXISTING FUCNTIONALITY CHECK
+        if (currencyId && currencyName && currencyRate) {
 
             addCurrency();
             fetchCurrencies();
@@ -170,7 +162,7 @@ function getNames() {
         function clear() {
             currencyId = document.getElementById('currencyId').value = "";
             currencyName = document.getElementById('currencyName').value = "";
-            currencyScore = document.getElementById('currencyScore').value = "";
+            currencyRate = document.getElementById('currencyRate').value = "";
         }
     });
 
@@ -209,7 +201,7 @@ const outputHtml = matches => {
     if (matches.length > 0) {
         const html = matches.map(match => `
         <div>
-            <p>${match.id}  ${match.name}  (${match.score}%)</p>
+            <p>${match.id}  ${match.name}  (${match.rate})</p>
         </div>
         `).join('');
 
@@ -273,8 +265,8 @@ const output = matches => {
                 <div name="name" class="d-inline" contenteditable="true" id="newName"> ${match.name} </>
             </div>
             <div class="form-group">
-                <div class="d-inline">Final % Score: </>
-                <div class="d-inline" contenteditable="true" id="newScore"> ${match.score} </>
+                <div class="d-inline">Final Rate: </>
+                <div class="d-inline" contenteditable="true" id="newRate"> ${match.rate} </>
             </div>
             <button type="submit" class="btn btn-success d-block w-100 mb-5">EDIT</button>
         </form>
@@ -287,17 +279,12 @@ const output = matches => {
         EDIT.addEventListener('submit', (e) => {
             newCurrencyId = document.querySelector('#newID').innerHTML;
             newCurrencyName = document.querySelector('#newName').innerHTML;
-            newCurrencyScore = document.querySelector('#newScore').innerHTML;
+            newcurrencyRate = document.querySelector('#newRate').innerHTML;
 
-            if (newCurrencyScore < 0) {
-                window.alert("Score should not be below 0");
+            if (newcurrencyRate < 0) {
+                window.alert("Rate should not be below 0");
                 clear();
                 return;
-            } else if (newCurrencyScore > 100) {
-                window.alert("Score should not be above 100");
-                clear();
-                return;
-
             }
             editCurrency(oldCurrencyName);
             fetchCurrencies();
@@ -358,8 +345,8 @@ const output2 = matches => {
                 <div name="name" class="d-inline" contenteditable="true" id="newCurrencyName"> ${match.name} </>
             </div>
             <div class="form-group">
-                <div class="d-inline">Final % Score: </>
-                <div class="d-inline" contenteditable="true" id="newCurrencyScore"> ${match.score} </>
+                <div class="d-inline">Final Rate: </>
+                <div class="d-inline" contenteditable="true" id="newCurrencyRate"> ${match.rate} </>
             </div>
             <button type="submit" class="btn btn-danger d-block w-100 mb-5">DELETE</button>
         </form>
@@ -372,7 +359,7 @@ const output2 = matches => {
         DELETE.addEventListener('submit', (e) => {
             dCurrencyId = document.querySelector('#newCurrencyId').innerHTML;
             dCurrencyName = document.querySelector('#newCurrencyName').innerHTML;
-            dCurrencyScore = document.querySelector('#newCurrencyScore').innerHTML;
+            dCurrencyRate = document.querySelector('#newCurrencyRate').innerHTML;
 
             deleteCurrency(deleteCurrencyId);
             fetchCurrencies();
