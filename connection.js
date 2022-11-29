@@ -4,7 +4,7 @@ const fs = require('fs');
 const app = express();
 const port = 4000;
 const jsonParser = bodyParser.json();
-const fileName = 'currencies.json';
+const fileName = 'items.json';
 
 
 let rawData = fs.readFileSync(fileName);
@@ -43,6 +43,8 @@ const writeFile = (
     });
 };
 
+
+//READ DATA
 app.get('/', async function (request, response) {
     readFile(data => {
     response.render('home', {
@@ -50,14 +52,15 @@ app.get('/', async function (request, response) {
     }, true);
 });
 
-app.get('/currencies', (request, response) => {
+app.get('/items', (request, response) => {
     readFile(data => {
-        data.sort((a, b) => (a.name > b.name) ? 1 : -1);
+        // data.sort((a, b) => (a.name > b.name) ? 1 : -1);
         response.send(data);
     }, true);
 });
 
-app.post('/currencies', jsonParser, (request, response) => {
+//Adding data using POST
+app.post('/items', jsonParser, (request, response) => {
     data.push(request.body);
     fs.writeFileSync(fileName, JSON.stringify(data, null, 2));
     let isOkay = false;
@@ -68,30 +71,35 @@ app.post('/currencies', jsonParser, (request, response) => {
         return response.status(400).json({
             statusCode: response.statusCode,
             method: request.method,
-            message: 'That currency ID has already been entered'
+            message: 'That  ID has already been entered'
         });
     }
 });
 
-app.put('/currencies/:currencyId', jsonParser, (request, response) => {
+//EDITING DATA USING PUT
+//Filtering 
+app.put('/items/:itemId', jsonParser, (request, response) => {
     readFile(data => {
-        const currencyName = request.params['currencyId'];
-        const currency = data.filter((st) => st.id == currencyName);
-        currency[0]["name"] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
-        currency[0]['rate'] = request.body['rate'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        const itemName = request.params['itemId'];
+        const item = data.filter((st) => st.id == itemName);
+        item[0]["name"] = request.body['name'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        item[0]['date'] = request.body['date'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
+        item[0]['price'] = request.body['price'].toString().replace(/^\s+/, "").replace(/\s+$/, "").replace(/\s+/g, " ");
         writeFile(JSON.stringify(data, null, 2), () => {
-            response.status(200).send(`currency's name:${currencyName} updated`);
+            response.status(200).send(`Item's name:${itemName} updated`);
         });
     }, true);
 });
 
-app.delete('/currencies/:id', (req, res) => {
+
+//DELETING DATA
+app.delete('/items/:id', (req, res) => {
     readFile(data => {
-        const currencyId = req.params['id'];
-        var currencyIndex = data.findIndex(obj => obj.id == currencyId);
-        data.splice([currencyIndex], 1)
+        const itemId = req.params['id'];
+        var itemIndex = data.findIndex(obj => obj.id == itemId);
+        data.splice([itemIndex], 1)
         writeFile(JSON.stringify(data, null, 2), () => {
-            res.status(200).send(`currency's id:${currencyId} removed`);
+            res.status(200).send(`item's id:${itemId} removed`);
         });
     }, true);
 });

@@ -1,11 +1,11 @@
 {
-  "name": "ist-4035-project-2",
+  "name": "itemtracking",
   "version": "1.0.0",
-  "description": "PROJECT 2",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node connect.js"
+    "start": "node connection.js"
   },
   "repository": {
     "type": "git",

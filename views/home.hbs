@@ -4,8 +4,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <link rel="preconnect" href="https://fonts.gstatic.com"> 
+<link href="https://fonts.googleapis.com/css2?family=Raleway&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans&family=Raleway:ital@1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Raleway:wght@100&display=swap" rel="stylesheet">
+
   <title>
-    Currency SMA System
+    Commodity tracker
   </title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
     integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
@@ -13,244 +18,766 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <style>
-  .navbar{
-            /* background-color: rgb(81, 4, 153); */
-            background-color: #378a0d;
-            opacity: 0.8;
-            position: sticky;
-            
-        }
-  body {
-    background: #FFFF00;  /* fallback for old browsers */
-  }
-  body::after {
-  content: "";
-  opacity: 0.1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  position: absolute;
-  z-index: -1;   
+
+.navbar {
+  background-color: #6ab446; 
+  opacity: 0.8;
+  position: sticky;
 }
 
+.navbar a {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 18px;
+  letter-spacing: 2px;
+}
 
+.logo {
+  width: 2em;
+}
+
+/* Styles for the image hero and text */
+.bg-image {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+}
+
+.overlay {
+    position: absolute;
+    min-height: 113%;
+    min-width: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.price-overlay {
+  position: absolute;
+    object-fit: cover;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.6);
+}
+
+.description {
+	left: 50%;
+	position: absolute;
+	top: 45%;
+	transform: translate(-50%, -55%);
+	text-align: center;
+  padding-top: 10em;
+}
+
+.description a {
+  text-decoration: none;
+  color: inherit;
+}
+.description h1 {
+	color: #6ab446;
+  font-size: 2em;
+  font-weight: bolder;
+}
+.description p {
+	color: #fff;
+	font-size: 2rem;
+	line-height: 1.5;
+}
+
+.description button {
+    border:1px solid #6ab446;
+    background:#6ab446;
+    border-radius: 0;
+    color:#fff;
+}
+.description button:hover {
+	border:1px solid #fff;
+    background:#fff;
+    color:#000;
+}
+
+.img-container {
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
+  padding: 0;
+}
+
+.price-tracker {
+background-image: url('https://images.pexels.com/photos/4386339/pexels-photo-4386339.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1');
+box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+background-repeat: no-repeat;
+background-position: center;
+background-size: cover;
+height: 12em;
+margin-top: -4em;
+margin-bottom: -6em;
+}
+
+body {
+background-color: rgb(124, 117, 117);
+font-family: 'Raleway', sans-serif;
+font-size: 1.3em;
+overflow: scroll;
+}
+
+body::after {
+content: "";
+opacity: 0.1;
+top: 0;
+left: 0;
+bottom: 0;
+right: 0;
+position: absolute;
+z-index: -1;   
+}
+
+h3,p{
+text-align: center;
+}
+
+#intro
+{
+color: purple;
+}
+
+#tut
+{
+color: blue;
+}
+#calc
+{
+color: purple;
+}
+.form-group {
+width: 100%;
+border: 1% solid;
+}
+
+.form-box {
+display: flex;
+justify-content: center;
+align-items: center;
+background-color: grey;
+}
+
+.form-box label {
+  font-weight: lighter;
+  color: white;
+}
+
+.form-stuff {
+width: 100%;
+border: 2px solid grey;
+padding: 1em;
+border-radius: 10px;
+background-color:rgba(0, 0, 0, 0.6);
+-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+-moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+box-shadow: .5px .5px 5px 5px rgba(0, 0, 0, 0.432);
+margin: 1.5em;
+}
+
+.form-stuff h5,p {
+  font-weight: lighter;
+  color: white;
+}
+
+.form-control {
+  padding: .1em .25em;
+  background-color:rgba(0, 0, 0, 0.329);
+  outline: #6ab446;
+  border: none;
+}
+
+#add {
+  font-weight: bolder;
+  color: black;
+  margin-top: 2em;
+  padding-top: 1em;
+}
+
+.button-group {
+  display: flex;
+  margin: 2em 1em 0em 6em;
+  justify-content: space-around;
+}
+
+/* styles the image grid */
+.features {
+	margin: 4em auto;
+	padding: 1em;
+	position: relative;
+}
+.feature-title {
+	color: #333;
+	font-size: 1.3rem;
+	font-weight: 700;
+	margin-bottom: 20px;
+	text-transform: uppercase;
+}
+.features img {
+	-webkit-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+	-moz-box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+	box-shadow: 1px 1px 4px rgba(0, 0, 0, 0.4);
+	margin-bottom: 16px;
+}
+
+/* styles the footer section */
+.page-footer {
+    background-color: #222;
+    color: #ccc;
+    padding: 60px 0 30px;
+}
+.footer-copyright {
+    color: #666;
+    padding: 40px 0;
+}
+
+.container-features {
+  background-color: red;
+}
+
+/*----  Main Style  ----*/
+#cards_landscape_wrap-2{
+  text-align: center;
+  background: #F7F7F7;
+}
+#cards_landscape_wrap-2 .container{
+  padding-top: 80px; 
+  padding-bottom: 100px;
+}
+#cards_landscape_wrap-2 a{
+  text-decoration: none;
+  outline: none;
+}
+#cards_landscape_wrap-2 .card-flyer {
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box{
+  background: #ffffff;
+  overflow: hidden;
+  box-shadow: 0px 2px 15px rgba(0, 0, 0, 0.50);
+  border-radius: 5px;
+}
+#cards_landscape_wrap-2 .card-flyer .image-box img{
+  -webkit-transition:all .9s ease; 
+  -moz-transition:all .9s ease; 
+  -o-transition:all .9s ease;
+  -ms-transition:all .9s ease; 
+  width: 100%;
+  height: 200px;
+}
+#cards_landscape_wrap-2 .card-flyer:hover .image-box img{
+  opacity: 0.7;
+  -webkit-transform:scale(1.15);
+  -moz-transform:scale(1.15);
+  -ms-transform:scale(1.15);
+  -o-transform:scale(1.15);
+  transform:scale(1.15);
+}
+#cards_landscape_wrap-2 .card-flyer .text-box{
+  text-align: center;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box .text-container{
+  padding: 30px 18px;
+}
+#cards_landscape_wrap-2 .card-flyer{
+  background: #FFFFFF;
+  margin-top: 50px;
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  box-shadow: 0px 3px 4px rgba(0, 0, 0, 0.40);
+}
+#cards_landscape_wrap-2 .card-flyer:hover{
+  background: #fff;
+  box-shadow: 0px 15px 26px rgba(0, 0, 0, 0.50);
+  -webkit-transition: all 0.2s ease-in;
+  -moz-transition: all 0.2s ease-in;
+  -ms-transition: all 0.2s ease-in;
+  -o-transition: all 0.2s ease-in;
+  transition: all 0.2s ease-in;
+  margin-top: 50px;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box p{
+  margin-top: 10px;
+  margin-bottom: 0px;
+  padding-bottom: 0px; 
+  font-size: 14px;
+  letter-spacing: 1px;
+  color: #000000;
+}
+#cards_landscape_wrap-2 .card-flyer .text-box h6{
+  margin-top: 0px;
+  margin-bottom: 4px; 
+  font-size: 18px;
+  font-weight: bold;
+  text-transform: uppercase;
+  font-family: 'Roboto Black', sans-serif;
+  letter-spacing: 1px;
+  color: #00acc1;
+}
+
+/*styles for the graph section */
+.graph-area {
+  background-image: url('https://images.pexels.com/photos/159888/pexels-photo-159888.jpeg?auto=compress&cs=tinysrgb&w=600');
+  box-shadow: inset 0 0 0 2000px rgba(0, 0, 0, 0.6);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  color: white;
+  margin-top: -0.5em;
+}
 </style>
 
 </head>
 
-<body onload="fetchCurrencies()">
-  <nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="#">Simple Moving Average</a>
+<body onload="fetchitems()">
+  {{!-- nav bar --}}
+  <nav class="navbar navbar-expand-lg navbar-light sticky-top">
+  <a class="navbar-brand" href="#"><img class = "logo" src = "https://png.pngtree.com/png-vector/20220706/ourmid/pngtree-tree-logo-design-simple-hexagon-shape-png-image_5705992.png" alt = "website logo"/>Commodity Tracker</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNavDropdown">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item active">
-        <a class="nav-link" href="#intro">Introduction <span class="sr-only">(current)</span></a>
+        <a class="nav-link" href="#cards_landscape_wrap-2">Sample Products <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#tut">Tutorial</a>
+        <a class="nav-link" href="#add">Price Tracker</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#calc">Calculate</a>
+        <a class="nav-link" href="#graph">Graph</a>
       </li>
     </ul>
   </div>
 </nav>
-  <br><br><br>
-  <div class="container">
-    <div class="row">        
-      <div class="col-sm-12" id="intro">
-          <h1 id="intro">Introduction</h1>
-          <p style="color: black;">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, 
-          sed do eiusmod tempor incididunt ut labore 
-          et dolore magna aliqua. Ut enim ad minim veniam, 
-          quis nostrud exercitation ullamco laboris nisi ut 
-          aliquip ex ea commodo consequat.
-          </p>
-      </div>
+  <!-- Website Hero-->
+<div class="bg-image" style="background-image: url('https://images.pexels.com/photos/2733918/pexels-photo-2733918.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1'); height: 100vh;">
+     <div class="overlay"></div>
+     <div class="description">
+	<h1>Welcome to Commodity Tracker!</h1>
+	<p>Stay ahead of the curve with our amazing price tracker that helps you compare the price of fresh produce to the rate of inflation. Never be caught unaware again.</p>
+  <button class="btn btn-outline-secondary btn-lg"><a href = "#add">Get started</a></button>
+</div> 
+</div>
+
+  
+
+  {{!-- Intro paragraph --}}
+ <!-- Topic Cards -->
+    <div id="cards_landscape_wrap-2">
+        <div class="container">
+          <h1 class = "text-center">Sample products</h1>
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/tomato.jpg" alt="tomatoes" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Tomatoes</h6>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/eggs.jpg" alt="Eggs" />
+                                </div>
+                                <div class="text-container">                                    
+                                    <h6>Eggs</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/basmati.jpg" alt="Rice" />
+                                </div>
+
+                                <div class="text-container">
+                                    <h6>Rice</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/soko.jpg" alt="Flour" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Flour</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/hoho.jpg" alt="Flour" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Bell Pepper</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/rina oil.jpg" alt="Cooking Oil" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Cooking Oil</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/onions.jpg" alt="Onions" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Onions</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-3 col-lg-3">
+                    <a href="#add">
+                        <div class="card-flyer">
+                            <div class="text-box">
+                                <div class="image-box">
+                                    <img src="img/fresha.jpg" alt="Milk" />
+                                </div>
+                                <div class="text-container">
+                                    <h6>Milk</h6>
+                                </div>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
     </div>
+    
     <div>
-            <h1 id="tut" style="text-align:center;">Tutorial:</h1>
-            <h3>Step 1:</h3>
-            <h3>Step 2:</h3>
-            <h3>Step 3:</h3>
-            <h3>Step 4:</h3>
-        </div><br>
-    <div class="row">
-      <div class="col-md-3"><button type="button" class="btn btn-primary " onclick="viewcontent()">VIEW ENTRIES</button></div>
-      <div class="col-md-3"><button type="button" class="btn btn-danger " onclick="addcontent()">ADD NEW ENTRY</button></div>
-      <div class="col-md-3"><button type="button" class="btn btn-warning " onclick="editcontent()">EDIT AN ENTRY</button></div>
+          
+        {{!-- Buttons --}}
+    <div class = "price-tracker">
+    <div class = "price-overlay"></div>
+      <h1 id="add"  style="text-align:center;">Price Tracker</h1>
+    <div class="row button-group">
+      <div class="col-md-3"><button type="button" class="btn btn-primary " onclick="viewcontent()">VIEW ENTRIES</button></div><br><br>
+      <div class="col-md-3"><button type="button" class="btn btn-danger " onclick="addcontent()">ADD A NEW ENTRY</button></div><br><br>
+      <div class="col-md-3"><button type="button" class="btn btn-warning " onclick="editcontent()">EDIT AN ENTRY</button></div><br><br>
       <div class="col-md-3"><button type="button" class="btn btn-secondary" onclick="deletecontent()">DELETE AN ENTRY</button></div>
+    </div>
     </div>
     <br><br><br>
     
-    <div class="row">
-
+    {{!-- Adding an item form --}}
+    <div class="row form-box">
         <div class="col-md-4">
-          <div class="add">
+          <div class="add form-stuff">
             <form>
-              <div class="form-group">
-                <label>Currency Name</label>
-                <select name="currency-name" id="currencyName" class="form-control">
+              <div class="form-input">
+                <label>Item Name</label>
+                <select name="item-name" id="itemName" class="form-control">
                   <option></option>
-                  <option value="EUR/USD">EUR/USD</option>
-                  <option value="GBP/USD">GBP/USD</option>
-                  <option value="EUR/GBP">EUR/GBP</option>
+                  <option value="TOMATO">TOMATO @ kg</option>
+                  <option value="HOHO">HOHO @ kg</option>
+                  <option value="UNGA">UNGA @ kg</option>
+                  <option value="RICE">RICE @ kg</option>
+                  <option value="EGGS">EGGS @ pcs</option>
+                  <option value="COOKING_OIL">COOKING OIL @ Liter</option>
+                  <option value="MILK">MILK @ Liter</option>
+                  <option value="COOKING_GAS">COOKING GAS @ kg</option>
+                  <option value="SPAGGETI">SPAGETTI @ pcs</option>
+                  <option value="ONIONS">ONIONS @ kg</option>
+                  <option value="TISSUE_PAPER">TISSUE PAPER @ pcs</option>
+                  <option value="PORRIDGE">PORRIDGE @ kg</option>
                 </select>
               </div>
               <div class="form-group">
-                <label>Currency ID</label>
-                <input type="text" class="form-control" name="currency-id" id="currencyId" placeholder="Enter a unique currency ID">
+                <label>Entry ID (4 characters)</label>
+                <input type="text" class="form-control" name="item-id" id="itemId" placeholder="Enter a unique item ID">
               </div>
               <div class="form-group">
-                <label>CURRENCY EXCHANGE RATE</label>
-                <input type="number" class="form-control" name="currency-rate" id="currencyRate" placeholder="Enter currency exchange rate">
+                <label>Date </label>
+                <input type="month" class="form-control" name="entry-date" id="entrydate" placeholder="Enter a month and year">
+              </div>
+              <div class="form-group">
+                <label>price</label>
+                <input type="number" class="form-control" name="item-price" id="itemprice" placeholder="Enter item exchange price">
               </div>
               <input type="submit" class="mx-auto btn btn-primary" value="ADD" id="submit">
             </form>
           </div>
 
-          <div class="view">
+            {{!-- Search bar on top of item view --}}
+          <div class="view form-stuff" id="view">
                 <div class="text-center mt-3">
-                  <h5 class="text-center">Search Currency Record</h5>
+                  <h5 class="text-center">Search through items </h5>
                   <div class="form-group form-group-lg">
-                    <input type="text" id="search" class="form-control mt-4" placeholder="Enter currency ID">
+                    <input type="text" id="search" class="form-control mt-4" placeholder="Enter item ID">
                   </div>
                   <div id="match-list"></div>
                 </div>
             <table id="content" class="table table-striped  text-center mt-3"></table>
           </div>
 
-          <div class="edit">
+            {{!-- Edit item from --}}
+          <div class="edit form-stuff">
             <div class="text-center mt-3">
-              <h5>Search & Edit Currency Record</h5>
-              <p>(To edit currency record ensure only the desired record appears on the screen)</p>
-              <p>(Click on the Name or Rate respectively to edit)</p>
+              <h5>Search and Edit item Entry</h5>
+              <p>Condition:Search until only one entry appears on the screen</p>
+              <p>The data is clickable except ID</p>
+              <p>Click on the data value to enable editing</p>
               <div class="form-group form-group-lg">
-                <input type="text" id="editSearch" class="form-control mt-4" placeholder="Enter currency ID">
+                <input type="text" id="editSearch" class="form-control mt-4" placeholder="Enter item ID">
               </div>
               <div id="edit-list"></div>
             </div>
           </div>
 
-          <div class="delete">
+            {{!-- Delete item form --}}
+          <div class="delete form-stuff">
             <div class="text-center mt-3">
-              <h6>Search & Delete Currency Record</h6>
+              <h5>Search and Delete item Entry</h5>
+              <p>Condition: Search until only one entry appears on the screen</p>
               <div class="form-group form-group-lg">
-                <input type="text" id="deleteSearch" class="form-control mt-4" placeholder="Enter currency ID">
+                <input type="text" id="deleteSearch" class="form-control mt-4" placeholder="Enter item ID">
               </div>
               <div id="delete-list"></div>
             </div>
           </div>
         </div>
       <br><br>
-
-      <div class="col-md-8 text-center ml-auto">
-        <h6>
-          A GRAPH DISPLAYING CURRENCY SMAs
-        </h6>
-        <p>* To update the chart refresh the page</p>
+        
+      
+    </div>
+  </div>
+    <div>
+          <h1 id="graph" style="text-align:center;"> </h1>
+     {{!-- Graph area --}}
+      <div class="col-md-14 text-center ml-auto graph-area">
+        <h1 class = "text-center">Graph</h1>
+        <p>Refresh the page to update chart values</p>
         <canvas id="myChart" style=""></canvas>
       </div>
     </div>
-  </div>
-
-  {{!-- ------------------------------------------- --}}
-  {{!-- Chart.js Script tag --}}
+ {{!-- Chart data--}}
   <script>
-var myurl;
-$.getJSON("/currencies", function(data) {
+  var myurl;
+  $.getJSON("/items", function(data) {
   myurl = data;
-  const average = 5;
-  var gbp = [];
-  var eurgbp = [];
-  var eur = [];
-
-  const gbpExRt = []
-  const eurgbpExRt = []
-  const eurExRt = []
-
-
-  const the_labels = []
-
-  const gbpmovingAverage = [];
-  const eurgbpmovingAverage = [];
-  const eurmovingAverage = [];
-
-
+   
+  
+  var tomatoPrices = [];
+  var hohoPrices=[];
+  var ungaPrices=[];
+  var ricePrices=[];
+  var eggsPrices=[];
+  var oilPrices=[];
+  var milkPrices=[];
+  var gasPrices=[];
+  var spagettiPrices=[];
+  var onionsPrices=[];
+  var tpaperPrices=[];
+  var porridgePrices=[];
+  
+  //Grouping items according to similar types and 
+    //Storing price values in an array
+    
   for (var i = 0; i < myurl.length; i++){
-    if("EUR/GBP" === myurl[i]["name"]){
-      eurgbp.push(parseInt(myurl[i]["rate"]) )
+    if("TOMATO" === myurl[i]["name"]){
+      tomatoPrices.push(parseInt(myurl[i]["price"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
-    if("GBP/USD" === myurl[i]["name"]){
-      gbp.push(parseInt(myurl[i]["rate"]) )
+    if("HOHO" === myurl[i]["name"]){
+      hohoPrices.push(parseInt(myurl[i]["price"]) )
     }
   }
   for (var i = 0; i < myurl.length; i++){
-    if("EUR/USD" === myurl[i]["name"]){
-      eur.push(parseInt(myurl[i]["rate"]) )
+    if("UNGA" === myurl[i]["name"]){
+      ungaPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("RICE" === myurl[i]["name"]){
+      ricePrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("EGGS" === myurl[i]["name"]){
+      eggsPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("COOKING_OIL" === myurl[i]["name"]){
+      oilPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  
+  for (var i = 0; i < myurl.length; i++){
+    if("MILK" === myurl[i]["name"]){
+      milkPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("COOKING_GAS" === myurl[i]["name"]){
+      gasPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("SPAGETTI" === myurl[i]["name"]){
+      spagettiPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("ONIONS" === myurl[i]["name"]){
+      onionsPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("TISSUE_PAPER" === myurl[i]["name"]){
+      tpaperPrices.push(parseInt(myurl[i]["price"]) )
+    }
+  }
+  for (var i = 0; i < myurl.length; i++){
+    if("PORRIDGE" === myurl[i]["name"]){
+      porridgePrices.push(parseInt(myurl[i]["price"]) )
     }
   }
 
-  for (i=0; i < gbp.length; i++) {
-      const fivedatapoints = gbp.slice(i, average + i);
-      gbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(gbpmovingAverage);
-  }
-  for (i=0; i < eurgbp.length; i++) {
-      const fivedatapoints = eurgbp.slice(i, average + i);
-      eurgbpmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(eurgbpmovingAverage);
-  }
-  for (i=0; i < eur.length; i++) {
-      const fivedatapoints = eur.slice(i, average + i);
-      eurmovingAverage.push(fivedatapoints.reduce((total, num) => total + num) / average);
-      // console.log(eurmovingAverage);
-  }
-
-
-// console.log(Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length));
-  const randomlabels = Math.max(gbpmovingAverage.length, eurgbpmovingAverage.length, eurmovingAverage.length);
-  for (i=1; i < randomlabels; i++){
-    the_labels.push(`A${i}`)
-    // console.log('darknexx')
-  }
-
-
+ //Chart drawing
     var ctx = document.getElementById("myChart").getContext('2d');
 
     var myChart = new Chart(ctx, {
       type: 'line',
       data: {
-        labels: [...the_labels], // THIS IS WHERE WE ARE GOING TO EDIT
-        datasets: [
+        labels: ["Jan","Feb","March","April","May","June","July","August","Sept","Oct","Nov","Dec"], 
+        
+        datasets:
+        [
           {
-          label: 'EUR/GBP',
-          data: [...eurgbpmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+          label: 'TOMATO',
+          data: [...tomatoPrices],
           fill: false,
           borderColor: 'rgb(75, 192, 192)',
           tension: 0.1
           },
           {
-            label: 'GBP/USD',
-            data: [...gbpmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+            label: 'HOHO',
+            data: [...hohoPrices], 
             fill: false,
             borderColor: 'rgb(255, 0, 0)',
             tension: 0.1
           },
           {
-            label: 'EUR/USD',
-            data: [...eurmovingAverage], // THIS IS WHERE WE ARE GOING TO EDIT
+            label: 'UNGA',
+            data: [...ungaPrices],
             fill: false,
             borderColor: 'purple',
             tension: 0.1
+          },
+          {
+          label: 'RICE',
+          data: [...ricePrices],
+          fill: false,
+          borderColor: 'yellow',
+          tension: 0.1
+          },
+          {
+            label: 'EGGS',
+            data: [...eggsPrices], 
+            fill: false,
+            borderColor: 'orange',
+            tension: 0.1
+          },
+          {
+            label: 'OIL',
+            data: [...oilPrices],
+            fill: false,
+            borderColor: 'green',
+            tension: 0.1
+          },
+          {
+          label: 'MILK',
+          data: [...milkPrices],
+          fill: false,
+          borderColor: 'brown',
+          tension: 0.1
+          },
+          {
+            label: 'GAS',
+            data: [...gasPrices], 
+            fill: false,
+            borderColor: 'pink',
+            tension: 0.1
+          },
+          {
+            label: 'SPAGETTI',
+            data: [...spagettiPrices],
+            fill: false,
+            borderColor: 'violet',
+            tension: 0.1
+          },
+          {
+          label: 'ONIONS',
+          data: [...onionsPrices],
+          fill: false,
+          borderColor: 'grey',
+          tension: 0.1
+          },
+          {
+            label: 'TISSUE',
+            data: [...tpaperPrices], 
+            fill: false,
+            borderColor: 'black',
+            tension: 0.1
+          },
+          {
+            label: 'PORRIDGE',
+            data: [...porridgePrices],
+            fill: false,
+            borderColor: 'blue',
+            tension: 0.1
           }
+          
         ]
       },
       options: {
@@ -276,6 +803,24 @@ $.getJSON("/currencies", function(data) {
 
   <script type="text/javascript" src="index.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx" crossorigin="anonymous"></script>
+  <footer class="page-footer">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-8 col-sm-12">
+                <h6 class="text-uppercase font-weight-bold">Additional Information</h6>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque interdum quam odio, quis placerat ante luctus eu. Sed aliquet dolor id sapien rutrum, id vulputate quam iaculis.</p>
+        </div>
+        <div class="col-lg-4 col-md-4 col-sm-12">
+            <h6 class="text-uppercase font-weight-bold">Contact</h6>
+            <p>1640 Riverside Drive, Hill Valley, California
+            <br/>info@commoditytracker.com
+            <br/>+ 01 234 567 88
+            <br/>+ 01 234 567 89</p>
+        </div>
+    <div>
+    <div class="footer-copyright text-center">© 2020 Copyright: CommodityTracker.com</div>
+</footer>
 </body>
 
 </html>
